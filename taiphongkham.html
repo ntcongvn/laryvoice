@@ -1449,6 +1449,52 @@ margin-top: 30px;
 		  color: red;
 		  cursor: pointer;
 	  }
+	  
+	  /* Wrapper */
+.ai-warning-box {
+    padding: 12px 14px;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+/* Item */
+.ai-warning-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.ai-warning-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Icon */
+.ai-warning-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: #f87171;
+    fill: none;
+    stroke-width: 2;
+    
+}
+
+/* Text */
+.ai-warning-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    line-height: 1.3;
+}
+
+.ai-warning-desc {
+    font-size: 12.5px;
+    color: #9ca3af;
+    margin-top: 2px;
+}
+	  .ai-warning-box{
+		  min-height: 160px;
+	  }
   </style>
 </head>
 <body>
@@ -1710,10 +1756,49 @@ document.addEventListener('click', function(e){
                 BẤT THƯỜNG PHÁT HIỆN
               </div>
 
-              <div class="abnormal-box">
-                Cell này hiện kết quả, ví dụ: Theo<br>
-                dõi u dây thanh
-              </div>
+              <div class="ai-warning-box">
+    
+    <div class="ai-warning-item">
+        <div class="ai-warning-icon">
+			<svg viewBox="0 0 24 24">
+				<!-- Tam giác -->
+				<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+
+				<!-- Dấu ! (thân) -->
+				<line x1="12" y1="9" x2="12" y2="13"/>
+
+				<!-- Dấu chấm -->
+				<circle cx="12" cy="17" r="1.2"/>
+			</svg>
+		</div>
+        <div class="ai-warning-text">
+            <div class="ai-warning-title">Jitter không điển hình (Cục bộ)</div>
+         <!--   <div class="ai-warning-desc">Số đo vượt quá phương sai cơ sở 4.2%</div>  -->
+        </div>
+    </div>
+
+    <!--<div class="ai-warning-item">
+        <div class="ai-warning-icon">
+			<svg viewBox="0 0 24 24">
+				
+				<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+
+				
+				<line x1="12" y1="9" x2="12" y2="13"/>
+
+				
+				<circle cx="12" cy="17" r="1.2"/>
+			</svg>
+		</div>
+        <div class="ai-warning-text">
+            <div class="ai-warning-title">Giảm dải động</div>
+            <div class="ai-warning-desc">Nén đáng kể trong dải tần 2kHz - 4kHz</div>
+        </div>
+    </div> -->
+
+ 
+
+</div>
             </article>
 
             <article class="panel soft-panel recommendation-panel">
