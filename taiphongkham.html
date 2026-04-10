@@ -1,0 +1,1753 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaryVoice - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f8fc;
+      --panel:#ffffff;
+      --border:#e5ebf3;
+      --text:#1f2937;
+      --muted:#75809a;
+      --blue:#144ea6;
+      --blue-2:#0f4fb4;
+      --nav:#f3f6fb;
+      --danger:#c62828;
+      --success:#1d6f49;
+      --shadow:0 10px 30px rgba(16,24,40,.08);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    .app{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* TOP HEADER - single full-width frame */
+    .topbar{
+      height:82px;
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 22px 0 26px;
+      box-shadow:0 1px 0 rgba(255,255,255,.6) inset;
+    }
+
+    .top-left{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      min-width:0;
+      flex:1;
+    }
+
+    .brand{
+      font-size:22px;
+      font-weight:700;
+      color:#2f4f92;
+      letter-spacing:-.02em;
+      flex:0 0 auto;
+      margin-right:2px;
+    }
+
+    .search{
+      flex:1;
+      max-width:560px;
+      position:relative;
+      min-width:180px;
+    }
+
+    .search input{
+      width:100%;
+      height:54px;
+      border:none;
+      outline:none;
+      background:transparent;
+      color:#95a0b6;
+      font-size:17px;
+      padding:0 18px 0 48px;
+    }
+
+    .search input::placeholder{color:#a7b0c2}
+    .search i{
+      position:absolute;
+      left:16px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#b5bdd0;
+      font-size:17px;
+    }
+
+    .top-right{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex:0 0 auto;
+      margin-left:18px;
+    }
+
+    .icon-btn{
+      width:34px;height:34px;
+      display:grid;place-items:center;
+      color:#64748b;
+      border-radius:999px;
+      position:relative;
+      font-size:18px;
+    }
+    .icon-btn .dot{
+      position:absolute;
+      right:7px; top:6px;
+      width:6px; height:6px; border-radius:50%;
+      background:#d22;
+    }
+    .avatar-wrap{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding-left:16px;
+      border-left:1px solid #e8edf5;
+    }
+    .user-meta{
+      text-align:right;
+      line-height:1.05;
+    }
+    .user-meta .name{
+      font-weight:700;
+      font-size:15px;
+      color:#26334a;
+      margin-bottom:6px;
+    }
+    .user-meta .role{
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.02em;
+      color:#7a8699;
+    }
+    .avatar{
+      width:40px;height:40px;border-radius:50%;
+      overflow:hidden;
+      box-shadow:inset 0 0 0 2px #d8e2f2;
+      background:#dfeaf7;
+      flex:0 0 auto;
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* MAIN 3-column area */
+    .body{
+      display:grid;
+      grid-template-columns: 245px minmax(0, 1fr) 0px;
+      gap:16px;
+      padding:0 16px 14px 16px;
+      align-items:start;
+    }
+
+    .leftbar, .center, .rightbar{
+      min-height: calc(100vh - 82px - 14px);
+    }
+
+    .leftbar{
+      background:#fff;
+      border-right:1px solid var(--border);
+      border-left:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      border-radius:0 0 0 0;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .clinic{
+      padding:12px 16px 14px 16px;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      background:#fbfcfe;
+      border-bottom:1px solid #eef2f7;
+    }
+    .clinic-icon{
+      width:28px;height:28px;border-radius:4px;
+      background:#1f5aa6;
+      color:#fff;
+      display:grid;place-items:center;
+      margin-top:2px;
+      flex:0 0 auto;
+      font-size:14px;
+    }
+    .clinic h1{
+      margin:0;
+      font-size:16px;
+      line-height:1.05;
+      font-weight:700;
+      color:#23304a;
+    }
+    .clinic span{
+      display:block;
+      margin-top:4px;
+      font-size:11px;
+      color:#7d889b;
+      font-weight:600;
+      letter-spacing:.01em;
+    }
+
+    .navmenu{
+      padding:14px 12px;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .navitem{
+      height:48px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:0 14px;
+      border-radius:10px;
+      color:#8691a4;
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:.01em;
+    }
+    .navitem i{width:18px;text-align:center;font-size:18px}
+    .navitem.active{
+      color:#1f5aa6;
+      background:#f6f9ff;
+      box-shadow:inset 0 0 0 1px #e5eefb;
+    }
+    .spacer{flex:1}
+    .logout{
+      margin:0 14px 16px 14px;
+      height:48px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color:#7f8a9f;
+      font-weight:600;
+      font-size:13px;
+      padding:0 4px;
+      border-top:1px solid #f0f3f8;
+    }
+    .logout i{font-size:17px}
+
+    .center{
+      min-width:0;
+    }
+
+    .hero{
+      background:transparent;
+      padding-top:4px;
+    }
+    .kicker{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.18em;
+      color:#58739a;
+      margin:0 0 6px 0;
+    }
+    .title{
+      margin:0 0 14px 0;
+      font-size:54px;
+      line-height:1;
+      letter-spacing:-.04em;
+      font-weight:800;
+      color:#121926;
+    }
+
+    .stats-row{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:10px;
+      margin-bottom:18px;
+    }
+    .stat-card{
+      background:#fff;
+      border:1px solid #eef2f6;
+      border-radius:10px;
+      min-height:114px;
+      padding:14px 14px 12px 14px;
+      box-shadow:0 3px 12px rgba(17,24,39,.04);
+      position:relative;
+      overflow:hidden;
+    }
+    .stat-card:before{
+      content:"";
+      position:absolute;
+      left:0; top:0; bottom:0;
+      width:4px;
+      border-radius:10px 0 0 10px;
+      background:#1f5aa6;
+    }
+    .stat-card.red:before{background:#c52727}
+    .stat-card.gray:before{background:#667085}
+    .stat-label{
+      color:#7a879c;
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      margin:2px 0 18px 10px;
+    }
+    .stat-value{
+      margin-left:10px;
+      font-size:40px;
+      line-height:1;
+      font-weight:800;
+      letter-spacing:-.04em;
+      color:#111827;
+    }
+    .stat-card.red .stat-value{color:#c52828}
+    .mini-pill{
+      position:absolute;
+      right:14px;
+      bottom:14px;
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:12px;
+      font-weight:800;
+      background:#eefaf2;
+      color:#0f7a47;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .warning-box{
+      position:absolute;
+      right:18px;
+      top:45px;
+      width:38px;
+      height:38px;
+      border-radius:8px;
+      background:#f7e8e8;
+      color:#e6b5b5;
+      display:grid;
+      place-items:center;
+      font-size:18px;
+    }
+    .mini-note{
+      position:absolute;
+      right:12px;
+      bottom:14px;
+      color:#98a2b3;
+      font-size:12px;
+      font-weight:600;
+    }
+
+    .table-card{
+      background:#fff;
+      border:1px solid #eef2f6;
+      border-radius:12px;
+      box-shadow:0 3px 12px rgba(17,24,39,.04);
+      overflow:hidden;
+    }
+    .table-toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 14px 10px 14px;
+    }
+    .tabs{
+      display:flex;
+      gap:6px;
+    }
+    .tab{
+      height:34px;
+      padding:0 16px;
+      border-radius:6px;
+      display:grid;
+      place-items:center;
+      font-size:13px;
+      font-weight:700;
+      color:#6e7b90;
+      background:transparent;
+    }
+    .tab.active{
+      background:#eef3fb;
+      color:#1f5aa6;
+    }
+    .sort{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#98a2b3;
+      font-size:13px;
+      font-weight:600;
+      padding-right:2px;
+    }
+    .sort b{color:#324055}
+    .sort i{font-size:12px;color:#98a2b3}
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    thead th{
+      text-align:left;
+      padding:14px 14px 12px 14px;
+      color:#98a2b3;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      border-top:1px solid #f2f5f8;
+    }
+    tbody td{
+      padding:16px 14px;
+      border-top:1px solid #f4f6f9;
+      vertical-align:middle;
+      font-size:14px;
+      color:#344054;
+    }
+    .patient{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .initial{
+      width:38px;height:38px;border-radius:11px;
+      background:#eef2f7;
+      color:#a6afbf;
+      display:grid;place-items:center;
+      font-weight:800;
+      font-size:15px;
+      flex:0 0 auto;
+    }
+    .pname{
+      font-weight:700;
+      color:#263248;
+      line-height:1.1;
+    }
+    .pid{
+      margin-top:2px;
+      font-size:11px;
+      color:#a2aab9;
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .time{
+      font-weight:800;
+      font-size:16px;
+      color:#1f2937;
+      line-height:1.1;
+    }
+    .late{
+      margin-top:4px;
+      color:#b63a3a;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.02em;
+    }
+    .ai-bad{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:#c02828;
+      font-weight:700;
+    }
+    .ai-good{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:#195f40;
+      font-weight:700;
+    }
+    .ai-wait{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:#8b95a6;
+      font-weight:700;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      display:inline-block;
+      flex:0 0 auto;
+    }
+    .dot.red{background:#cf2a2a}
+    .dot.green{background:#117a49}
+    .dot.gray{background:#8d95a7}
+    .pill{
+      display:inline-block;
+      padding:5px 8px;
+      border-radius:8px;
+      font-size:11px;
+      font-weight:800;
+      margin-top:6px;
+    }
+    .pill.red{background:#ffe2e2;color:#c63a3a}
+    .pill.green{background:#e3f6ea;color:#1b7b4c}
+    .pill.gray{background:#edf1f5;color:#7d8797}
+
+    .actions{
+      white-space:nowrap;
+    }
+    .action-btn{
+      width:32px;height:32px;border-radius:4px;
+      border:none;
+      background:#1650a8;
+      color:#fff;
+      margin-right:8px;
+      font-size:14px;
+      display:inline-grid;place-items:center;
+      box-shadow:0 6px 12px rgba(21,80,168,.22);
+    }
+    .action-eye{
+      color:#5f6b80;
+      font-size:16px;
+    }
+
+    .rightbar{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .right-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .date-chip{
+      height:44px;
+      padding:0 14px;
+      border-radius:10px;
+      background:#f6f8fb;
+      color:#4e5b6e;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:inset 0 0 0 1px #eef2f7;
+      white-space:nowrap;
+    }
+    .new-btn{
+      height:52px;
+      border:none;
+      outline:none;
+      border-radius:12px;
+      background:linear-gradient(180deg,#1960c7,#154ea5);
+      color:#fff;
+      padding:0 5px;
+      font-size:17px;
+      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 10px 18px rgba(22,82,171,.25);
+      cursor:pointer;
+      white-space:nowrap;
+    }
+
+    .side-card{
+      background:#fff;
+      border:1px solid #eef2f6;
+      border-radius:12px;
+      box-shadow:0 3px 12px rgba(17,24,39,.04);
+      overflow:hidden;
+    }
+    .completed{
+	  margin-top:30px;
+      padding:16px 16px 14px 16px;
+      border-left:4px solid #1f7a55;
+      max-height:120px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .side-label{
+      color:#7a879c;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .completed .number{
+      font-size:42px;
+      font-weight:800;
+      color:#175f42;
+      line-height:1;
+      margin-top:6px;
+    }
+    .green-check{
+      width:38px;height:38px;border-radius:8px;
+      background:#e3f0ea;
+      display:grid;place-items:center;
+      color:#32c27b;
+      font-size:18px;
+      align-self:flex-end;
+    }
+
+    .ai-center{
+      padding:14px 14px 14px 14px;
+      border-left:4px solid #c42929;
+    }
+    .ai-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      color:#2c3647;
+      font-size:13px;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .ai-title i{
+      color:#c42929;
+      font-size:14px;
+    }
+    .alert-card{
+      border-radius:8px;
+      padding:14px 14px 12px 14px;
+      margin-bottom:10px;
+      background:#fbf0f0;
+      border:1px solid #f1dddd;
+    }
+    .alert-card.greenbg{
+      background:#eef4f0;
+      border-color:#e2ebe4;
+    }
+    .alert-head{
+      font-weight:800;
+      font-size:13px;
+      margin:0 0 6px 0;
+    }
+    .alert-head.red{color:#c23a3a}
+    .alert-head.green{color:#3d7d61}
+    .alert-text{
+      margin:0;
+      color:#667085;
+      font-size:12px;
+      line-height:1.55;
+      font-weight:500;
+    }
+    .update{
+      padding:14px 16px 16px 16px;
+      margin-top:2px;
+    }
+    .update .mini{
+      color:#93a0b4;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .update-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      color:#627086;
+      font-size:13px;
+      font-weight:600;
+    }
+    .update-item i{
+      color:#4a78c2;
+      margin-top:2px;
+    }
+
+    .live{
+      height:178px;
+      border-radius:12px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.13), transparent 18%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,.09), transparent 22%),
+        linear-gradient(180deg, rgba(19,23,34,.96), rgba(7,9,16,.98));
+      overflow:hidden;
+      position:relative;
+      box-shadow:var(--shadow);
+      border:1px solid #1b2330;
+      display:flex;
+      align-items:flex-end;
+      padding:18px;
+      color:#fff;
+    }
+    .live:before{
+      content:"";
+      position:absolute;
+      inset:20px 22px 36px 22px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.05);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), transparent),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,.06) 0 1px,
+          transparent 1px 26px
+        );
+      opacity:.65;
+    }
+    .live-inner{
+      position:relative;
+      z-index:1;
+    }
+    .live-kicker{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.1em;
+      color:#8da0c9;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+    .live-title{
+      font-size:20px;
+      font-weight:800;
+      margin:0 0 6px 0;
+      color:#fff;
+    }
+    .live-id{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.12em;
+      color:#d1d8e6;
+    }
+    .live-id .red{
+      width:7px;height:7px;border-radius:50%;background:#df3434;display:inline-block;
+    }
+
+    @media (max-width: 1260px){
+      .body{
+        grid-template-columns: 220px minmax(0, 1fr);
+      }
+      .rightbar{grid-column:1 / -1; min-height:auto; padding-bottom:16px;}
+    }
+    @media (max-width: 980px){
+      .topbar{height:auto; padding:14px 16px; gap:10px; flex-wrap:wrap}
+      .top-left,.top-right{width:100%}
+      .search{max-width:none}
+      .body{
+        grid-template-columns:1fr;
+      }
+      .leftbar,.center,.rightbar{
+        min-height:auto;
+      }
+      .leftbar{border-left:none}
+    }
+	/* ====== HOVER NAV MENU ====== */
+	.navitem:hover{
+	  background:#eef3fb;
+	  color:#1f5aa6;
+	  cursor:pointer;
+	  transition: all 0.2s ease;
+	}
+
+	
+    /* ===== PATIENT DETAIL PAGE (blue frame content) ===== */
+    .center{
+      padding-top:4px;
+    }
+
+    .patient-page{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      padding:0;
+      min-height:calc(100vh - 96px);
+    }
+
+    .patient-header-card,
+    .panel{
+      box-shadow:0 3px 12px rgba(17,24,39,.04);
+    }
+
+    .patient-header-card{
+      background:#fff;
+      border:1px solid #eef2f6;
+      border-radius:12px;
+      padding:18px 18px 16px 18px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .patient-identity{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      min-width:0;
+      flex:1;
+    }
+
+    .patient-avatar{
+      width:64px;
+      height:64px;
+      border-radius:14px;
+      background:#dbe6ff;
+      color:#315fb2;
+      display:grid;
+      place-items:center;
+      font-size:22px;
+      font-weight:800;
+      letter-spacing:-.03em;
+      box-shadow:inset 0 0 0 1px #cddcff;
+      flex:0 0 auto;
+    }
+
+    .patient-name{
+      font-size:35px;
+      line-height:1;
+      font-weight:800;
+      letter-spacing:-.04em;
+      color:#0f1725;
+      margin-top:1px;
+    }
+
+    .patient-submeta{
+      margin-top:8px;
+      color:#b2b8c4;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .dotsep{
+      margin:0 8px;
+      color:#d0d6e2;
+    }
+
+    .patient-right{
+      display:flex;
+      align-items:flex-start;
+      justify-content:flex-end;
+      gap:16px;
+      flex-wrap:wrap;
+      min-width:0;
+    }
+
+    .allergy-note{
+      text-align:center;
+      padding:3px 8px 0;
+      min-width:150px;
+    }
+
+    .allergy-label{
+      color:#b4b8c4;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      line-height:1.15;
+    }
+
+    .allergy-value{
+      margin-top:6px;
+      color:#b74242;
+      font-size:15px;
+      font-weight:800;
+      line-height:1.1;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn-outline,
+    .btn-primary,
+    .footer-primary,
+    .footer-link{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      font-family:inherit;
+    }
+
+    .btn-outline{
+      height:42px;
+      padding:0 16px;
+      border-radius:10px;
+      background:#fff;
+      color:#335f99;
+      font-size:14px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:inset 0 0 0 1px #dbe4f2;
+    }
+
+    .btn-primary{
+      height:42px;
+      padding:0 16px;
+      border-radius:10px;
+      background:#1459bd;
+      color:#fff;
+      font-size:14px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      box-shadow:0 8px 14px rgba(20,89,189,.18);
+    }
+
+    .patient-grid{
+      display:grid;
+      gap:14px;
+    }
+
+    .top-grid{
+      grid-template-columns: 1.05fr 1.15fr 0.9fr;
+    }
+
+    .bottom-grid{
+      grid-template-columns: 1.05fr 1.08fr 0.97fr;
+    }
+
+    .panel{
+      background:#f6f7fa;
+      border:1px solid #f0f2f6;
+      border-radius:12px;
+      padding:18px 18px 16px;
+      min-height:238px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .soft-panel{
+      background:#f7f7fb;
+    }
+
+    .panel-title{
+      color:#7a7f8a;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.18em;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:16px;
+      text-transform:uppercase;
+    }
+
+    .panel-title i,
+    .panel-title span{
+      color:#7f8591;
+    }
+
+    .history-list{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .history-item{
+      background:#fff;
+      border-radius:8px;
+      padding:16px 14px 14px;
+      box-shadow:0 1px 0 rgba(16,24,40,.02);
+    }
+
+    .history-label,
+    .current-label{
+      color:#a2a8b3;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      margin-bottom:4px;
+    }
+
+    .history-value{
+      color:#2d3440;
+      font-size:18px;
+      font-weight:700;
+      line-height:1.25;
+    }
+
+    .spectrogram-panel{
+      justify-content:flex-start;
+    }
+
+    .spectrogram-box{
+      position:relative;
+      height:148px;
+      background:#d9d9d9;
+      border-radius:2px;
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      gap:6px;
+      padding:14px 24px 18px;
+    }
+
+    .spectrogram-box::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.34), rgba(255,255,255,.06));
+      pointer-events:none;
+    }
+
+    .bar{
+      width:26px;
+      border-radius:0;
+      background:#9fb3d2;
+      align-self:flex-end;
+      position:relative;
+      z-index:1;
+    }
+
+    .bar.h1{height:52px}
+    .bar.h2{height:72px}
+    .bar.h3{height:34px}
+    .bar.h4{height:79px}
+    .bar.h5{height:95px}
+    .bar.h6{height:66px}
+    .bar.h7{height:56px}
+    .bar.h8{height:74px}
+    .bar.h9{height:24px}
+
+    .bar.blue{background:#0e4fae}
+    .bar.red{background:#d22222}
+
+    .spectrogram-axis{
+      position:absolute;
+      bottom:7px;
+      color:#8e8e8e;
+      font-size:10px;
+      font-weight:700;
+      z-index:2;
+    }
+
+    .spectrogram-axis.left{left:305px}
+    .spectrogram-axis.right{right:10px}
+
+    .gauge-panel{
+      align-items:center;
+      text-align:center;
+      padding-top:20px;
+    }
+
+    .gauge-title{
+      width:100%;
+      justify-content:center;
+      margin-bottom:10px;
+    }
+
+    .gauge-wrap{
+      position:relative;
+      width:136px;
+      height:136px;
+      display:grid;
+      place-items:center;
+      margin-top:2px;
+    }
+
+    .gauge-svg{
+      width:136px;
+      height:136px;
+      transform:rotate(-90deg);
+      overflow:visible;
+    }
+
+    .gauge-track,
+    .gauge-progress{
+      fill:none;
+      stroke-width:7.5;
+      cx:60;
+      cy:60;
+      r:44;
+    }
+
+    .gauge-track{
+      stroke:#e0e1e4;
+    }
+
+    .gauge-progress{
+      stroke:#c71f1f;
+      stroke-linecap:round;
+      stroke-dasharray:276.46;
+      stroke-dashoffset:60.82;
+      transform-origin:60px 60px;
+    }
+
+    .gauge-center{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      transform:translateY(1px);
+    }
+
+    .gauge-value{
+      color:#2a2a2a;
+      font-size:34px;
+      font-weight:800;
+      letter-spacing:-.04em;
+      line-height:1;
+    }
+
+    .gauge-value span{
+      font-size:22px;
+      font-weight:800;
+    }
+
+    .gauge-caption{
+      margin-top:14px;
+      color:#b53b3b;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .gauge-confidence{
+      margin-top:5px;
+      color:#a3a8b3;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .current-panel{
+      gap:12px;
+    }
+
+    .current-section{
+      margin-bottom:2px;
+    }
+
+    .symptom-pills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:2px;
+    }
+
+    .symptom-pill{
+      display:inline-flex;
+      align-items:center;
+      height:24px;
+      padding:0 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.01em;
+      white-space:nowrap;
+    }
+
+    .symptom-pill.danger{
+      background:#ffd7d7;
+      color:#bf4c4c;
+    }
+
+    .symptom-pill.blue{
+      background:#d8e2fb;
+      color:#5872a8;
+    }
+
+    .smoking-box{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-top:8px;
+      background:#f0f1f4;
+      border-radius:8px;
+      padding:16px 16px 14px;
+    }
+
+    .smoking-icon{
+      width:28px;
+      height:28px;
+      border-radius:7px;
+      display:grid;
+      place-items:center;
+      color:#b94b4b;
+      font-size:16px;
+      flex:0 0 auto;
+    }
+
+    .smoking-title{
+      color:#2b313d;
+      font-size:16px;
+      font-weight:800;
+      line-height:1.15;
+    }
+
+    .smoking-sub{
+      margin-top:4px;
+      color:#98a0ac;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .abnormal-panel{
+      justify-content:flex-start;
+    }
+
+    .abnormal-box{
+      flex:1;
+      margin-top:2px;
+      border-radius:2px;
+      border:2px solid #3c68a3;
+      background:#5684c1;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size:20px;
+      line-height:1.38;
+      padding:20px;
+      font-weight:400;
+      letter-spacing:-.01em;
+    }
+
+    .recommendation-panel{
+      justify-content:flex-start;
+    }
+
+    .recommendation-box{
+      flex:1;
+      background:#e9f2ed;
+      border:1px solid #d6e5db;
+      border-radius:2px;
+      padding:14px 16px 14px 16px;
+    }
+
+    .recommendation-head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#2a7b55;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .recommendation-head i{
+      color:#2a7b55;
+      font-size:15px;
+    }
+
+    .recommendation-text{
+      margin:0;
+      color:#28303d;
+      font-size:15px;
+      line-height:1.55;
+      font-weight:500;
+    }
+
+    .patient-footer{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:14px;
+      margin-top:8px;
+      padding:4px 4px 0;
+    }
+
+    .footer-link{
+      background:none;
+      color:#386cb6;
+      font-size:16px;
+      font-weight:700;
+      padding:10px 0;
+    }
+
+    .footer-primary{
+      height:54px;
+      padding:0 22px;
+      border-radius:10px;
+      background:#1657b7;
+      color:#fff;
+      font-size:16px;
+      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      box-shadow:0 10px 18px rgba(22,87,183,.24);
+    }
+
+    @media (max-width: 1260px){
+      .top-grid,
+      .bottom-grid{
+        grid-template-columns:1fr;
+      }
+      .patient-header-card{
+        flex-direction:column;
+      }
+      .patient-right{
+        justify-content:flex-start;
+      }
+      .spectrogram-axis.left{
+        left:10px;
+      }
+      .patient-footer{
+        justify-content:flex-start;
+        flex-wrap:wrap;
+      }
+    }
+
+    @media (max-width: 980px){
+      .patient-name{
+        font-size:28px;
+      }
+      .patient-submeta{
+        white-space:normal;
+      }
+      .btn-outline,
+      .btn-primary,
+      .footer-primary{
+        width:100%;
+        justify-content:center;
+      }
+      .header-actions{
+        width:100%;
+      }
+      .panel{
+        min-height:auto;
+      }
+    }
+
+	  
+	  
+	.wf-group{
+  position:relative;
+}
+
+.wf-dropdown{
+  position:absolute;
+  top:110%;
+  left:0;
+  min-width:180px;
+  background:#fff;
+  border-radius:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,.12);
+  padding:8px;
+  display:none;
+  flex-direction:column;
+  gap:6px;
+  z-index:999;
+}
+
+.wf-dropdown.show{
+  display:flex;
+}
+
+.wf-subtab{
+  height:36px;
+  padding:0 12px;
+  border-radius:8px;
+  border:none;
+  background:#f4f7fc;
+  cursor:pointer;
+  text-align:left;
+  font-weight:600;
+}
+
+.wf-subtab:hover{
+  background:#e6efff;
+  color:#1459bd;
+}  
+	  
+	.wf-tab{
+  height:40px;
+  padding:0 18px;
+  border-radius:10px;
+  border:1px solid #e2e8f0;
+  background:#ffffff;
+  color:#5f6f87;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:all .2s ease;
+}
+	.tabs-row-main{
+  display:flex;
+  flex-direction:row;   /* đảm bảo ngang */
+  flex-wrap:nowrap;     /* không cho xuống dòng */
+  gap:10px;
+}  
+	.wf-tab:hover{
+  background:#f0f5ff;
+  border-color:#c7d7f5;
+  color:#1459bd;
+}  
+	.wf-tab.active{
+  background:#1459bd;
+  color:#fff;
+  border-color:#1459bd;
+  box-shadow:0 6px 14px rgba(20,89,189,.2);
+}
+	.wf-tab::after{
+  content:"▾";
+  font-size:11px;
+  opacity:.6;
+}  
+	  
+	  .btn-record,
+.btn-record-again,
+.btn-predict{
+margin-top: 30px;
+  height:35px;
+  padding:0 16px;
+  border-radius:10px;
+  font-size:14px;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  font-family:inherit;
+}
+
+.btn-record{
+  background:#eef5ff;
+  color:#2458a8;
+  box-shadow:inset 0 0 0 1px #d9e6fb;
+}
+
+.btn-record-again{
+  background:#fff7ea;
+  color:#b06a00;
+  box-shadow:inset 0 0 0 1px #f4dfb4;
+}
+
+.btn-predict{
+  background:#1459bd;
+  color:#fff;
+  box-shadow:0 8px 14px rgba(20,89,189,.18);
+}
+	  
+	  a {
+  text-decoration: none;   /* bỏ gạch chân */
+  color: inherit;          /* dùng màu của parent */
+}
+	  
+
+	  .logout:hover{
+		  color: red;
+		  cursor: pointer;
+	  }
+  </style>
+</head>
+<body>
+  <div class="app">
+
+    <header class="topbar">
+      <div class="top-left">
+        <div class="brand">LaryVoice</div>
+        
+		  
+		<div class="workflow-tabs" style="margin-left: 130px;">
+  <div class="tabs-row tabs-row-main">
+
+    <div class="wf-group">
+		<a href="taiphongkham.html"><button class="wf-tab active" onclick="toggleMenu(this)">Phòng khám</button></a>
+      <!--<div class="wf-dropdown">
+        <button class="wf-subtab">Tiếp nhận</button>
+        <button class="wf-subtab">Khám ban đầu</button>
+      </div>-->
+    </div>
+
+    <div class="wf-group">
+      <button class="wf-tab" onclick="toggleMenu(this)">Cận lâm sàng</button>
+      <div class="wf-dropdown">
+		  <a href="noisoithanhquan.html"><button class="wf-subtab">Nội soi thanh quản</button> </a>
+		  <a href="chupctscan.html"><button class="wf-subtab">Chụp CT scan</button> </a>
+        <button class="wf-subtab">Sinh thiết</button>
+      </div>
+    </div>
+
+    <div class="wf-group">
+		<a href="baocao.html"><button class="wf-tab" >Trả kết quả</button></a>
+    </div>
+
+    <div class="wf-group">
+		<a href="tuvan.html"><button class="wf-tab">Tư vấn</button></a>
+    </div>
+
+  </div>
+</div>
+		  
+	<script>
+function toggleMenu(btn){
+  const parent = btn.parentElement;
+  const menu = parent.querySelector('.wf-dropdown');
+
+  // đóng tất cả menu khác
+  document.querySelectorAll('.wf-dropdown').forEach(m => {
+    if(m !== menu) m.classList.remove('show');
+  });
+
+  // toggle menu hiện tại
+  menu.classList.toggle('show');
+
+  // active tab
+  document.querySelectorAll('.wf-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// click ra ngoài thì đóng menu
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.wf-group')){
+    document.querySelectorAll('.wf-dropdown').forEach(m => m.classList.remove('show'));
+  }
+});
+</script>	  
+		  
+      </div>
+
+      <div class="top-right">
+        <div class="icon-btn" title="Thông báo">
+          <i class="fa-regular fa-bell"></i>
+          <span class="dot"></span>
+        </div>
+        <div class="icon-btn" title="Trợ giúp">
+          <i class="fa-regular fa-circle-question"></i>
+        </div>
+
+        <div class="avatar-wrap">
+          <div class="user-meta">
+            <div class="name">BS. Julian Vance</div>
+            <div class="role">TRƯỞNG KHOA TAI MŨI HỌNG</div>
+          </div>
+          <div class="avatar" aria-label="avatar">
+            <img alt="avatar" src="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'><rect width='96' height='96' rx='48' fill='%23d9e7f8'/><circle cx='48' cy='38' r='18' fill='%23f2c6a8'/><path d='M22 84c4-18 20-26 26-26s22 8 26 26' fill='%232f6fb7'/><path d='M34 34c4-13 24-15 30 0-3 0-5-2-7-4-6 5-15 6-23 4z' fill='%23243b5a'/><circle cx='41' cy='38' r='2.2' fill='%23343f52'/><circle cx='55' cy='38' r='2.2' fill='%23343f52'/><path d='M41 46c4 4 10 4 14 0' stroke='%23b56d5d' stroke-width='2' stroke-linecap='round' fill='none'/><circle cx='30' cy='18' r='8' fill='%23ffffff' opacity='.8'/></svg>">
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="body">
+      <aside class="leftbar">
+        <div class="clinic">
+          <div class="clinic-icon"><i class="fa-solid fa-kit-medical"></i></div>
+          <div>
+            <h1>Cổng Lâm sàng</h1>
+            <span>KHOA TAI MŨI HỌNG</span>
+          </div>
+        </div>
+
+        <nav class="navmenu">
+          <a href="index.html"><div class="navitem "><i class="fa-regular fa-clipboard"></i> CÔNG VIỆC</div></a>
+          <a href="taiphongkham.html"><div class="navitem active"><i class="fa-regular fa-user"></i> BỆNH NHÂN</div></a>
+          <a href="baocao.html"><div class="navitem"><i class="fa-regular fa-file-lines"></i> BÁO CÁO</div></a>
+          <div class="navitem"><i class="fa-solid fa-gear"></i> CÀI ĐẶT</div>
+        </nav>
+
+        <div class="spacer"></div>
+        <div class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> ĐĂNG XUẤT</div>
+      </aside>
+
+
+      <main class="center">
+        <section class="patient-page">
+          <div class="patient-header-card">
+            <div class="patient-identity">
+              <div class="patient-avatar">EL</div>
+              <div class="patient-name-wrap">
+                <div class="patient-name">Huỳnh Nguyên Thuận</div>
+                <div class="patient-submeta">
+                  ID: #PX-88290 <span class="dotsep">•</span> NGÀY SINH: 14/05/1978 (45 TUỔI)
+                </div>
+              </div>
+            </div>
+
+			  
+			  <div class="header-actions">
+  <button class="btn-record" type="button">
+    <i class="fa-solid fa-microphone"></i>
+    Ghi âm
+  </button>
+
+  <button class="btn-record-again" type="button">
+    <i class="fa-solid fa-rotate-right"></i>
+    Ghi âm lại
+  </button>
+
+  <button class="btn-predict" type="button">
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+    Tiên đoán
+  </button>
+</div>
+			  
+			  
+            <div class="patient-right">
+              <div class="allergy-note">
+                <div class="allergy-label">DỊ ỨNG NGHIÊM TRỌNG</div>
+                <div class="allergy-value">Penicillin</div>
+              </div>
+
+              <div class="header-actions">
+  
+
+  <button class="btn-outline" type="button">
+    <i class="fa-regular fa-pen-to-square"></i>
+    Chỉnh sửa hồ sơ
+  </button>
+
+  <button class="btn-primary" type="button">
+    <i class="fa-solid fa-share-nodes"></i>
+    Chia sẻ ca bệnh
+  </button>
+</div>
+            </div>
+          </div>
+
+          <div class="patient-grid top-grid">
+            <article class="panel soft-panel">
+              <div class="panel-title">
+                <i class="fa-solid fa-notes-medical"></i>
+                TIỀN SỬ BỆNH LÝ
+              </div>
+
+              <div class="history-list">
+                <div class="history-item">
+                  <div class="history-label">BỆNH MÃN TÍNH</div>
+                  <div class="history-value">GERD (Đang điều trị bằng PPI)</div>
+                </div>
+
+                <div class="history-item">
+                  <div class="history-label">LỊCH SỬ PHẪU THUẬT</div>
+                  <div class="history-value">Phẫu thuật ruột thừa (2012)</div>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel soft-panel spectrogram-panel">
+              <div class="panel-title">
+                <i class="fa-solid fa-wave-square"></i>
+                TRỰC QUAN HÓA GIỌNG NÓI (SPECTROGRAM)
+              </div>
+
+              <div class="spectrogram-box" aria-label="spectrogram">
+                <span class="bar h1"></span>
+                <span class="bar h2"></span>
+                <span class="bar h3"></span>
+                <span class="bar h4 blue"></span>
+                <span class="bar h5 red"></span>
+                <span class="bar h6 blue"></span>
+                <span class="bar h7"></span>
+                <span class="bar h8"></span>
+                <span class="bar h9"></span>
+                <div class="spectrogram-axis left"></div>
+                <div class="spectrogram-axis right">0.0 giây 3.5 giây</div>
+              </div>
+            </article>
+
+            <article class="panel soft-panel gauge-panel">
+              <div class="panel-title gauge-title">
+                <span>ĐIỂM CHẨN ĐOÁN AI</span>
+              </div>
+
+              <div class="gauge-wrap">
+                <svg class="gauge-svg" viewBox="0 0 120 120" aria-label="diagnostic score 78%">
+                  <circle class="gauge-track" cx="60" cy="60" r="44"></circle>
+                  <circle class="gauge-progress" cx="60" cy="60" r="44"></circle>
+                </svg>
+                <div class="gauge-center">
+                  <div class="gauge-value">78<span>%</span></div>
+                </div>
+              </div>
+
+              <div class="gauge-caption">Khả năng cao có bất thường</div>
+              <div class="gauge-confidence">Độ tin cậy: 94.2%</div>
+            </article>
+          </div>
+
+          <div class="patient-grid bottom-grid">
+            <article class="panel soft-panel current-panel">
+              <div class="panel-title">
+                <i class="fa-solid fa-person-rays"></i>
+                TÌNH TRẠNG HIỆN TẠI
+              </div>
+
+              <div class="current-section">
+                <div class="current-label">TRIỆU CHỨNG CHÍNH</div>
+                <div class="symptom-pills">
+                  <span class="symptom-pill danger">Khàn tiếng kéo dài</span>
+                  <span class="symptom-pill blue">Đau thanh quản</span>
+                  <span class="symptom-pill blue">Khó nuốt</span>
+                </div>
+              </div>
+
+              <div class="current-section">
+                <div class="current-label">TÌNH TRẠNG HÚT THUỐC</div>
+                <div class="smoking-box">
+                  <div class="smoking-icon"><i class="fa-solid fa-smoking"></i></div>
+                  <div>
+                    <div class="smoking-title">Đang hút thuốc</div>
+                    <div class="smoking-sub">Tiền sử 15 bao-năm</div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="panel soft-panel abnormal-panel">
+              <div class="panel-title">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                BẤT THƯỜNG PHÁT HIỆN
+              </div>
+
+              <div class="abnormal-box">
+                Cell này hiện kết quả, ví dụ: Theo<br>
+                dõi u dây thanh
+              </div>
+            </article>
+
+            <article class="panel soft-panel recommendation-panel">
+              <div class="panel-title">
+                <i class="fa-solid fa-bullhorn"></i>
+                KHUYẾN NGHỊ AI
+              </div>
+
+              <div class="recommendation-box">
+                <div class="recommendation-head">
+                  <i class="fa-solid fa-gear"></i>
+                  Gợi ý lộ trình lâm sàng
+                </div>
+                <p class="recommendation-text">
+                  Các đặc điểm âm thanh tương quan mạnh mẽ với tình trạng bất thường niêm mạc dây thanh âm. Gợi ý nội soi
+                  ngay lập tức để quan sát kỹ hơn và có thể sinh thiết vùng thanh môn.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="patient-footer">
+            <button class="footer-link" type="button">Lưu phân tích giọng nói</button>
+            <button class="footer-primary" type="button">
+              Tiến hành nội soi
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </section>
+      </main>
+
+
+    </div>
+  </div>
+
+</body>
+</html>
