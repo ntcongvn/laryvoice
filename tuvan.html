@@ -2950,7 +2950,617 @@ a {
 		  color: red;
 		  cursor: pointer;
 	  }
+	  /* ==== CARE PLAN SCREEN – overrides ==== */
+.center.cp-page{
+  background:#f5f7fb;
+  padding:0;
+}
+
+.cp-shell{
+  padding:12px 10px 10px 0;
+  min-width:0;
+}
+
+.cp-header{
+  background:#fff;
+  border:1px solid #e8edf4;
+  border-radius:12px;
+  min-height:74px;
+  display:grid;
+  grid-template-columns: 1.05fr 1fr 1.35fr;
+  gap:18px;
+  align-items:center;
+  padding:12px 16px 12px 16px;
+  box-shadow:0 3px 12px rgba(17,24,39,.04);
+  margin-bottom:16px;
+}
+
+.cp-patient{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+
+.cp-avatar{
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  background:#e7eefb;
+  color:#4a6fb0;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  font-size:16px;
+}
+
+.cp-patient-meta{
+  min-width:0;
+}
+
+.cp-name{
+  font-size:16px;
+  font-weight:800;
+  color:#1e2430;
+  line-height:1.1;
+}
+
+.cp-submeta{
+  margin-top:4px;
+  font-size:11px;
+  color:#7a8596;
+  font-weight:700;
+}
+
+.cp-dotsep{
+  margin:0 6px;
+  color:#c5cbd6;
+}
+
+.cp-title{
+  text-align:center;
+  font-size:18px;
+  font-weight:800;
+  color:#2c67b1;
+  letter-spacing:-.02em;
+}
+
+.cp-summary{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:18px;
+  justify-self:end;
+  width:100%;
+}
+
+.cp-summary-item{
+  min-width:0;
+}
+
+.cp-summary-label{
+  color:#a0a7b4;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+
+.cp-summary-value{
+  font-size:15px;
+  font-weight:800;
+  color:#1d2430;
+  line-height:1.1;
+}
+
+.cp-red{
+  color:#c53b3b;
+}
+
+.cp-risk{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.cp-risk > span{
+  font-size:18px;
+  font-weight:800;
+  color:#214f9f;
+}
+
+.cp-risk-bar{
+  width:46px;
+  height:6px;
+  border-radius:999px;
+  background:#d6e0ef;
+  overflow:hidden;
+}
+
+.cp-risk-fill{
+  width:94%;
+  height:100%;
+  border-radius:inherit;
+  background:#214f9f;
+}
+
+.cp-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 400px;
+  gap:14px;
+  align-items:start;
+}
+
+.cp-left,
+.cp-right{
+  min-width:0;
+}
+
+.cp-card{
+  background:#fff;
+  border:1px solid #e8edf4;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(17,24,39,.04);
+}
+
+.cp-roadmap{
+  padding:14px 16px 16px;
+  margin-bottom:14px;
+}
+
+.cp-card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.cp-card-title{
+  color:#263042;
+  font-size:15px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.cp-card-title i{
+  color:#2f5d95;
+  font-size:14px;
+}
+
+.cp-card-title.small{
+  font-size:14px;
+}
+
+.cp-badge{
+  background:#e8f4ee;
+  color:#587d67;
+  border-radius:999px;
+  padding:5px 12px;
+  font-size:11px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.cp-timeline{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  position:relative;
+  padding-top:8px;
+}
+
+.cp-timeline::before{
+  content:"";
+  position:absolute;
+  left:38px;
+  right:38px;
+  top:32px;
+  height:1px;
+  background:#dfe6f1;
+}
+
+.cp-step{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  padding:0 6px;
+}
+
+.cp-step-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  margin:0 auto 12px;
+  display:grid;
+  place-items:center;
+  background:#eef2f7;
+  color:#9aa4b5;
+  font-size:16px;
+  border:1px solid #e4e9f1;
+}
+
+.cp-step.active .cp-step-icon{
+  background:#1b57a7;
+  color:#fff;
+  border-color:#1b57a7;
+}
+
+.cp-step.active .cp-step-icon.outline{
+  background:#fff;
+  color:#1b57a7;
+  border:2px solid #1b57a7;
+}
+
+.cp-step-icon.gray{
+  background:#fff;
+  color:#c8ced9;
+  border:1px solid #e5eaf1;
+}
+
+.cp-step-stage{
+  color:#1f3561;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+.cp-step-label{
+  color:#2a2f39;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.25;
+}
+
+.cp-step:not(.active) .cp-step-stage,
+.cp-step:not(.active) .cp-step-label{
+  color:#7f8794;
+}
+
+.cp-table-card{
+  padding:10px 0 0;
+  overflow:hidden;
+}
+
+.cp-table-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:0 16px 10px;
+}
+
+.cp-link-btn{
+  border:none;
+  background:none;
+  color:#3570b7;
+  font-size:12px;
+  font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+}
+
+.cp-table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.cp-table thead th{
+  text-align:left;
+  padding:12px 16px 10px;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#99a2b1;
+  font-weight:800;
+  border-top:1px solid #eef2f6;
+  white-space:nowrap;
+}
+
+.cp-table tbody td{
+  padding:14px 16px;
+  border-top:1px solid #f1f4f8;
+  font-size:13px;
+  color:#3a4454;
+  vertical-align:middle;
+}
+
+.cp-med-name{
+  font-weight:800;
+  color:#202838;
+}
+
+.cp-note{
+  color:#7d8595;
+  font-style:italic;
+}
+
+.cp-status{
+  display:inline-flex;
+  align-items:center;
+  height:24px;
+  padding:0 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.cp-status.ok{
+  background:#dff4e8;
+  color:#1b7a4e;
+}
+
+.cp-right{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.cp-ai-card{
+  padding:14px 0 10px;
+}
+
+.cp-ai-card .cp-card-head{
+  padding:0 16px 4px;
+  margin-bottom:8px;
+}
+
+.cp-rec{
+  display:flex;
+  gap:0;
+  padding:14px 16px 12px 0;
+  margin:0 0 10px;
+}
+
+.cp-rec:last-child{
+  margin-bottom:0;
+}
+
+.cp-rec-left{
+  width:4px;
+  border-radius:0 3px 3px 0;
+  margin-right:12px;
+}
+
+.cp-rec-body{
+  min-width:0;
+  flex:1;
+  padding-right:16px;
+}
+
+.cp-rec.green{
+  background:#eef8f2;
+}
+
+.cp-rec.green .cp-rec-left{
+  background:#1f7a55;
+}
+
+.cp-rec.blue{
+  background:#f2f6fb;
+}
+
+.cp-rec.blue .cp-rec-left{
+  background:#245fb1;
+}
+
+.cp-rec.sky{
+  background:#eef5ff;
+}
+
+.cp-rec.sky .cp-rec-left{
+  background:#8aa5d8;
+}
+
+.cp-rec-kicker{
+  color:#8da2b0;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+.cp-rec-title{
+  color:#243042;
+  font-size:14px;
+  font-weight:800;
+  line-height:1.25;
+  margin-bottom:4px;
+}
+
+.cp-rec-text{
+  color:#6f7784;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.cp-chart-card{
+  padding:14px 16px 12px;
+}
+
+.cp-chart-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.cp-chart-time{
+  color:#a1a8b3;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.cp-chart{
+  position:relative;
+  height:180px;
+  padding:8px 4px 0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.cp-bars{
+  display:flex;
+  align-items:flex-end;
+  gap:6px;
+  flex:1;
+  height:100%;
+}
+
+.cp-bars-end{
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  width:72px;
+  height:100%;
+}
+
+.cp-bar{
+  width:28px;
+  border-radius:0;
+}
+
+.cp-bar.light{ background:#d9e4f4; }
+.cp-bar.mid{ background:#a9bfdf; }
+.cp-bar.dark{ background:#5f84b8; }
+.cp-bar.green{ background:#5b8f75; }
+
+.cp-bar.h1{ height:22px; }
+.cp-bar.h2{ height:42px; }
+.cp-bar.h3{ height:62px; }
+.cp-bar.h4{ height:82px; }
+.cp-bar.h5{ height:104px; }
+.cp-bar.tall{ width:30px; height:118px; }
+
+.cp-chart-axis{
+  position:absolute;
+  left:0;
+  right:80px;
+  bottom:0;
+  display:flex;
+  justify-content:space-between;
+  color:#9aa3af;
+  font-size:10px;
+  font-weight:700;
+  padding:0 2px;
+}
+
+.cp-chart-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:8px;
+  color:#7f8795;
+  font-size:12px;
+  font-weight:700;
+}
+
+.cp-improve{
+  color:#4c7f67;
+}
+
+.cp-footer{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:14px;
+  padding-bottom:4px;
+}
+
+.cp-footer-btn{
+  height:40px;
+  border-radius:10px;
+  padding:0 16px;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:800;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  border:none;
+}
+
+.cp-footer-btn.ghost{
+  background:#fff;
+  color:#475a75;
+  box-shadow:inset 0 0 0 1px #d8e2ef;
+}
+
+.cp-footer-btn.outline{
+  background:#fff;
+  color:#3c67a3;
+  box-shadow:inset 0 0 0 1px #d3deef;
+}
+
+.cp-footer-btn.primary{
+  background:linear-gradient(180deg,#185fc3,#1454af);
+  color:#fff;
+  box-shadow:0 10px 18px rgba(22,82,171,.22);
+}
+
+@media (max-width: 1260px){
+  .cp-header{
+    grid-template-columns:1fr;
+  }
+  .cp-title{
+    text-align:left;
+  }
+  .cp-summary{
+    grid-template-columns:1fr;
+    gap:10px;
+    justify-self:start;
+  }
+  .cp-grid{
+    grid-template-columns:1fr;
+  }
+  .cp-timeline{
+    grid-template-columns:1fr 1fr;
+  }
+  .cp-footer{
+    flex-wrap:wrap;
+    justify-content:flex-start;
+  }
+}
+
+@media (max-width: 980px){
+  .cp-shell{
+    padding-right:0;
+  }
+  .cp-timeline{
+    grid-template-columns:1fr;
+  }
+  .cp-table{
+    display:block;
+    overflow-x:auto;
+  }
+}
+	  .cp-title{
+		  text-align: inherit;
+	  }
+	  .cp-chart-axis
+	  {
+		  bottom: -16px;
+	  }
+	  .cp-chart {
+		  margin-bottom: 22px;
+	  }
+	  .cp-chart-axis {
+		  width: 100%;
+	  }
+	  .cp-bars-end {
+		  margin-right: 27px;
+	  }
   </style>
+	
 </head>
 <body>
   <div class="app">
@@ -3062,109 +3672,220 @@ document.addEventListener('click', function(e){
       </aside>
 
      
-		<main class="center">
-  <section class="care-plan-page">
-    <div class="care-plan-topbar">
-      <div class="patient-strip">
-        <div class="patient-meta-block">
-          <div class="patient-meta-label">BỆNH NHÂN</div>
-          <div class="patient-meta-name">Huỳnh Nguyên Thuận</div>
-        </div>
+		<main class="center cp-page">
+  <section class="cp-shell">
 
-        <div class="patient-meta-block">
-          <div class="patient-meta-label">MÃ SỐ CA BỆNH</div>
-          <div class="patient-meta-name patient-code">LV-99283-2024</div>
+    <div class="cp-header">
+      <div class="cp-patient">
+        <div class="cp-avatar">HT</div>
+        <div class="cp-patient-meta">
+          <div class="cp-name">Huỳnh Nguyên Thuận</div>
+          <div class="cp-submeta">ID: 9928341 <span class="cp-dotsep">|</span> Tuổi: 54</div>
         </div>
-
-        
       </div>
 
-      <a href="#" class="back-btn">
-        QUAY LẠI DANH SÁCH
-      </a>
-    </div>
+      <div class="cp-title">Kế hoạch Chăm sóc Cá nhân hóa</div>
 
-    <div class="care-plan-layout">
-      <div class="left-visual-box">
-        <div class="left-visual-text">Đưa “Tư vấn kế hoạch chăm sóc” vào đây</div>
-      </div>
-
-      
-
-        <div class="plan-card">
-          <div class="plan-card-head">
-            <div class="plan-title">
-              <i class="fa-solid fa-sparkles"></i>
-              Kế hoạch chăm sóc AI
-            </div>
-          </div>
-
-          <div class="plan-item">
-            <div class="plan-item-left">
-              <i class="fa-solid fa-microphone-slash"></i>
-            </div>
-            <div class="plan-item-content">
-              <div class="plan-item-title">Nghỉ giọng tuyệt đối</div>
-              <div class="plan-item-sub">Thời gian: 10–14 ngày. Hạn chế tối đa việc phát âm.</div>
-            </div>
-            <div class="plan-check"><i class="fa-regular fa-circle"></i></div>
-          </div>
-
-          <div class="plan-item">
-            <div class="plan-item-left">
-              <i class="fa-solid fa-user-group"></i>
-            </div>
-            <div class="plan-item-content">
-              <div class="plan-item-title">Trị liệu ngôn ngữ</div>
-              <div class="plan-item-sub">Giảm các kiểu căng cơ thanh quản thứ phát.</div>
-            </div>
-            <div class="plan-check"><i class="fa-regular fa-circle"></i></div>
-          </div>
-
-          <div class="plan-item">
-            <div class="plan-item-left">
-              <i class="fa-solid fa-kit-medical"></i>
-            </div>
-            <div class="plan-item-content">
-              <div class="plan-item-title">Hội chẩn phẫu thuật</div>
-              <div class="plan-item-sub">Đánh giá vì phẫu nếu tổn thương không thuyên giảm.</div>
-            </div>
-            <div class="plan-check"><i class="fa-regular fa-circle"></i></div>
-          </div>
-
-          <div class="plan-item">
-            <div class="plan-item-left">
-              <i class="fa-regular fa-calendar-days"></i>
-            </div>
-            <div class="plan-item-content">
-              <div class="plan-item-title">Tái khám</div>
-              <div class="plan-item-sub">Dự kiến sau 4 tuần sau đợt trị liệu đầu tiên.</div>
-            </div>
-            <div class="plan-check"><i class="fa-regular fa-circle"></i></div>
-          </div>
-
-          <div class="add-recommendation">
-            + THÊM KHUYẾN NGHỊ
-          </div>
-			<div class="action-panel">
-          <button class="approve-btn" type="button">Phê duyệt &amp; Ký báo cáo</button>
-
-          <div class="action-row">
-            <button class="secondary-btn" type="button">
-              <i class="fa-solid fa-pen"></i>
-              CHỈNH SỬA
-            </button>
-            <button class="secondary-btn blue" type="button">
-              <i class="fa-solid fa-paper-plane"></i>
-              GỬI PORTAL
-            </button>
+      <div class="cp-summary">
+        <div class="cp-summary-item">
+          <div class="cp-summary-label">CHẨN ĐOÁN</div>
+          <div class="cp-summary-value cp-red">U thanh quản</div>
+        </div>
+        <div class="cp-summary-item">
+          <div class="cp-summary-label">GIAI ĐOẠN</div>
+          <div class="cp-summary-value">Giai đoạn III (T2N1M0)</div>
+        </div>
+        <div class="cp-summary-item">
+          <div class="cp-summary-label">CHỈ SỐ NGUY CƠ AI</div>
+          <div class="cp-risk">
+            <span>94%</span>
+            <div class="cp-risk-bar"><div class="cp-risk-fill"></div></div>
           </div>
         </div>
-        </div>
-
-        
       </div>
     </div>
+
+    <div class="cp-grid">
+      <section class="cp-left">
+        <div class="cp-card cp-roadmap">
+          <div class="cp-card-head">
+            <div class="cp-card-title">
+              <i class="fa-solid fa-route"></i>
+              Lộ trình điều trị cá nhân hóa AI
+            </div>
+            <div class="cp-badge">ĐỘ TIN CẬY: CAO</div>
+          </div>
+
+          <div class="cp-timeline">
+            <div class="cp-step active done">
+              <div class="cp-step-icon"><i class="fa-solid fa-pen"></i></div>
+              <div class="cp-step-text">
+                <div class="cp-step-stage">Giai đoạn 2</div>
+                <div class="cp-step-label">Phẫu thuật cắt bỏ</div>
+              </div>
+            </div>
+
+            <div class="cp-step active">
+              <div class="cp-step-icon outline"><i class="fa-regular fa-calendar-days"></i></div>
+              <div class="cp-step-text">
+                <div class="cp-step-stage">Giai đoạn 2</div>
+                <div class="cp-step-label">Hóa - Xạ trị bổ trợ</div>
+              </div>
+            </div>
+
+            <div class="cp-step">
+              <div class="cp-step-icon gray"><i class="fa-regular fa-user"></i></div>
+              <div class="cp-step-text">
+                <div class="cp-step-stage">Giai đoạn 3</div>
+                <div class="cp-step-label">Trị liệu âm ngữ</div>
+              </div>
+            </div>
+
+            <div class="cp-step">
+              <div class="cp-step-icon gray"><i class="fa-regular fa-eye"></i></div>
+              <div class="cp-step-text">
+                <div class="cp-step-stage">Giai đoạn 4</div>
+                <div class="cp-step-label">Theo dõi định kỳ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cp-card cp-table-card">
+          <div class="cp-table-top">
+            <div class="cp-card-title small">
+              <i class="fa-solid fa-notes-medical"></i>
+              Chỉ định Thuốc &amp; Chăm sóc
+            </div>
+            <button class="cp-link-btn" type="button">
+              <i class="fa-solid fa-circle-plus"></i>
+              Thêm chỉ định
+            </button>
+          </div>
+
+          <table class="cp-table">
+            <thead>
+              <tr>
+                <th>Tên thuốc/chỉ định</th>
+                <th>Liều lượng/Tần suất</th>
+                <th>Ghi chú lâm sàng</th>
+                <th>Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cp-med-name">Methylprednisolone</td>
+                <td>16mg, 2 lần/ngày (Sáng-Chiều)</td>
+                <td class="cp-note">Kiểm soát phù nề sau phẫu thuật</td>
+                <td><span class="cp-status ok">Đang dùng</span></td>
+              </tr>
+              <tr>
+                <td class="cp-med-name">Amoxicillin/Clavulanate</td>
+                <td>1g, 2 lần/ngày</td>
+                <td class="cp-note">Phòng ngừa nhiễm trùng vết mổ</td>
+                <td><span class="cp-status ok">Đang dùng</span></td>
+              </tr>
+              <tr>
+                <td class="cp-med-name">Paracetamol</td>
+                <td>0,5g 2 lần/ngày</td>
+                <td class="cp-note">Giảm đau</td>
+                <td><span class="cp-status ok">Đang dùng</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <aside class="cp-right">
+        <div class="cp-card cp-ai-card">
+          <div class="cp-card-head">
+            <div class="cp-card-title small">
+              <i class="fa-solid fa-lightbulb"></i>
+              Khuyến nghị AI
+            </div>
+          </div>
+
+          <div class="cp-rec green">
+            <div class="cp-rec-left"></div>
+            <div class="cp-rec-body">
+              <div class="cp-rec-kicker">Hỗ trợ Phục hồi</div>
+              <div class="cp-rec-title">Kiểm soát xơ hóa vùng cổ sau xạ trị</div>
+              <div class="cp-rec-text">Sử dụng liệu pháp xoa bóp mô mềm 2 tuần/lần.</div>
+            </div>
+          </div>
+
+          <div class="cp-rec blue">
+            <div class="cp-rec-left"></div>
+            <div class="cp-rec-body">
+              <div class="cp-rec-kicker">Vận động liệu pháp</div>
+              <div class="cp-rec-title">Bài tập vận động thanh quản cấp độ 2</div>
+              <div class="cp-rec-text">Duy trì tần suất 15 phút/lần, 3 lần/ngày.</div>
+            </div>
+          </div>
+
+          <div class="cp-rec sky">
+            <div class="cp-rec-left"></div>
+            <div class="cp-rec-body">
+              <div class="cp-rec-kicker">Dinh dưỡng</div>
+              <div class="cp-rec-title">Chế độ dinh dưỡng giàu đạm hỗ trợ lành thương</div>
+              <div class="cp-rec-text">Bổ sung whey protein và vitamin nhóm B.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cp-card cp-chart-card">
+          <div class="cp-chart-head">
+            <div class="cp-card-title small">
+              <i class="fa-solid fa-chart-line"></i>
+              Dự báo phục hồi (GRBAS)
+            </div>
+            <div class="cp-chart-time">12 tháng tới</div>
+          </div>
+
+          <div class="cp-chart">
+            <div class="cp-bars">
+              <div class="cp-bar h1 light"></div>
+              <div class="cp-bar h2 light"></div>
+              <div class="cp-bar h2 light"></div>
+              <div class="cp-bar h3 mid"></div>
+              <div class="cp-bar h4 mid"></div>
+              <div class="cp-bar h5 mid"></div>
+              <div class="cp-bar h5 dark"></div>
+            </div>
+            <div class="cp-chart-axis">
+              <span>T1</span>
+              <span>T4</span>
+              <span>T8</span>
+              <span>T12</span>
+            </div>
+            <div class="cp-bars-end">
+              <div class="cp-bar tall green"></div>
+            </div>
+          </div>
+
+          <div class="cp-chart-footer">
+            <div>Chất lượng giọng nói</div>
+            <div class="cp-improve">Cải thiện +65%</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="cp-footer">
+      <button class="cp-footer-btn ghost" type="button">
+        <i class="fa-solid fa-print"></i>
+        In báo cáo cho bệnh nhân
+      </button>
+      <button class="cp-footer-btn outline" type="button">
+        <i class="fa-solid fa-sliders"></i>
+        Tùy chỉnh lộ trình
+      </button>
+      <button class="cp-footer-btn primary" type="button">
+        <i class="fa-solid fa-circle-check"></i>
+        Phê duyệt kế hoạch
+      </button>
+    </div>
+
   </section>
 </main>
 
